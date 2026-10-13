@@ -1,7 +1,7 @@
 # Calcul-Mobil
 
 ## Titlu si tema proiectului
-NewsScroll: Știri verticale interactive prin derulare continuă
+NewsScroll: Știri verticale interactive prin derulare continuă  
 NewsScroll este o miniaplicație Android destinată consumului rapid și eficient al știrilor preluate dintr-un API extern, adaptată stilului modern de navigare mobilă. Aplicația implementează un flux vertical continuu în care fiecare element oferă un rezumat vizual și textual imediat.  
 
 Funcționalități principale:
