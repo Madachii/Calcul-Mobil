@@ -21,11 +21,32 @@ Astfel, aplicația transformă informarea zilnică într-o experiență intuitiv
 
 Madachii coordonează echipa. Ceilalți doi nu avem un rol fix, lucrăm la ce e nevoie în momentul respectiv. Împărțim taskurile săptămânal prin issue-urile de pe GitHub.
 
+---
+
+## Obiective propuse
+
+| Must Have | Should Have | Could Have | Won't Have |
+| :--- | :--- | :--- | :--- |
+| Mai multe ecrane cu navigare între ele | Categorii de știri | Conturi de utilizator cu Firebase Authentication | Backend propriu |
+| Feed vertical cu știri, sub formă de listă | Mesaje de încărcare și de eroare, de exemplu când nu e internet | Feed personalizat cu preferințele salvate în cloud, în Firebase | Versiune pentru iOS |
+| Deschiderea unei știri din feed duce la ecranul de detaliu | Reîmprospătarea feedului | Rezumarea știrilor cu un LLM | Versiune web / desktop |
+| Ecran de detaliu cu articolul complet | Paginare | Căutare vocală cu speech-to-text | Publicare în Google Play |
+| Salvarea locală pe telefon a articolelor favorite | Partajare articol prin share sheet | Știri locale în funcție de locație, cu GPS |  |
+| Preluare știri dintr-un API extern | Skeleton loaders + stare "gol" | Notificări pentru știri noi |  |
+| Ecran "Favorite":  lista articolelor salvate | Mod întunecat | Etichete / arhivă pentru favorite, organizare pe dosare |  |
+|  | Citirea știrilor cu text-to-speech | Istoric de citire + statistici simple de lectură |  |
+|  |  | Deep links: linkul partajat deschide articolul direct în aplicație |  |
+|  |  | Localizare RO/EN prin resurse strings.xml |  |
+|  |  | CI cu GitHub Actions: build automat la fiecare push |  |
+
+---
 # Analiză și Benchmark API-uri Gratuite de Știri
 
 Acest document centralizează toate API-urile de știri testate și 100% funcționale utilizate pentru agregarea datelor în cadrul proiectului. API-urile care au returnat erori de conexiune, timeout sau restricții de acces au fost excluse în urma testelor.
 
 ---
+
+
 
 ## Tabel API-uri Funcționale
 
