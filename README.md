@@ -2,4 +2,4 @@
 
 ## Diagrama Gantt
 
-![Diagrama Gantt](docs/gantt.png)
+![Diagrama Gantt](gantt.png)
