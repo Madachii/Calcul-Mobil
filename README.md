@@ -40,13 +40,17 @@ Madachii coordonează echipa. Ceilalți doi nu avem un rol fix, lucrăm la ce e 
 |  |  | CI cu GitHub Actions: build automat la fiecare push |  |
 
 ---
+
+## Diagrama Gantt
+
+![Diagrama Gantt](gantt.png)
+
+---
 # Analiză și Benchmark API-uri Gratuite de Știri
 
 Acest document centralizează toate API-urile de știri testate și 100% funcționale utilizate pentru agregarea datelor în cadrul proiectului. API-urile care au returnat erori de conexiune, timeout sau restricții de acces au fost excluse în urma testelor.
 
 ---
-
-
 
 ## Tabel API-uri Funcționale
 
