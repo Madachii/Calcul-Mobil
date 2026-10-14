@@ -1,5 +1,26 @@
 # Calcul-Mobil
 
+## Titlu si tema proiectului
+NewsScroll: Știri verticale interactive prin derulare continuă  
+NewsScroll este o miniaplicație Android destinată consumului rapid și eficient al știrilor preluate dintr-un API extern, adaptată stilului modern de navigare mobilă. Aplicația implementează un flux vertical continuu în care fiecare element oferă un rezumat vizual și textual imediat.  
+
+Funcționalități principale:
+- Parcurgere și detaliere: Navigare rapidă prin lista de știri și accesarea ecranului cu articolul complet.
+- Stocare locală: Salvarea știrilor favorite pe dispozitiv pentru citire offline.
+- Funcții inteligente și accesibilitate: Redare vocală (Text-to-Speech) și rezumare automată a articolelor cu ajutorul inteligenței artificiale (LLM).
+
+Astfel, aplicația transformă informarea zilnică într-o experiență intuitivă, accesibilă și adaptată ritmului alert al utilizatorilor moderni.
+
+## Membrii echipei
+
+| Nume | GitHub | Rol |
+|------|--------|-----|
+| Koma Kristian-Nicolae | [@Madachii](https://github.com/Madachii) | Coordonator / Dezvoltator android |
+| Hojda Paul-Andrei | [@ZetPlay10](https://github.com/ZetPlay10) | Dezvoltator android |
+| Băbuț Ștefan-Andrei | [@andimm09](https://github.com/andimm09) | Dezvoltator android |
+
+Madachii coordonează echipa. Ceilalți doi nu avem un rol fix, lucrăm la ce e nevoie în momentul respectiv. Împărțim taskurile săptămânal prin issue-urile de pe GitHub.
+
 # Analiză și Benchmark API-uri Gratuite de Știri
 
 Acest document centralizează toate API-urile de știri testate și 100% funcționale utilizate pentru agregarea datelor în cadrul proiectului. API-urile care au returnat erori de conexiune, timeout sau restricții de acces au fost excluse în urma testelor.
@@ -24,4 +45,3 @@ Acest document centralizează toate API-urile de știri testate și 100% funcți
 | **12** | **Wikipedia Featured** |  `200 OK` *(493ms)* | **Nu** | **Nelimitat** |  Nu *(Global / EN)* | `tfa`, `mostread`, `image`, `news` | Știrile zilei verificate enciclopedic (`news`), cele mai citite subiecte ale zilei (`mostread`) și imaginea zilei. |
 | **13** | **HackerNews API** |  `200 OK` *(558ms)* | **Nu** | **Nelimitat** |  Nu *(Tech / EN)* | `Array [500 IDs]` | Returnează lista celor mai populare 500 ID-uri de știri Tech; detaliile (titlu, URL, scor) se preiau prin `/v0/item/{id}.json`. |
 | **14** | **Spaceflight News** |  `200 OK` *(1383ms)* | **Nu** | **Nelimitat** |  Nu *(Space / EN)* | `count`, `next`, `previous`, `results` | Știri despre spațiu și tehnologie (NASA, ESA, SpaceX): titlu, rezumat, poză HD (`image_url`) și paginare automată. |
-
