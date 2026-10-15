@@ -1,0 +1,101 @@
+name: API check
+
+on:
+  push:
+    branches: [ feat/api-check ]
+  schedule:
+    - cron: "0 6 * * *"   # optional: daily health check
+  workflow_dispatch:       # manual "Run workflow" button
+
+jobs:
+  guardian:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.GUARDIAN_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://content.guardianapis.com/search?page-size=1&api-key=$K" || true)
+          echo "Guardian: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::Guardian HTTP $c"; exit 1; }
+          jq -e '.response.status == "ok"' b.json > /dev/null || { echo "::error::Guardian body not ok"; exit 1; }
+
+  newsdata:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.NEWSDATA_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://newsdata.io/api/1/latest?apikey=$K" || true)
+          echo "NewsData: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::NewsData HTTP $c"; exit 1; }
+          jq -e '.status == "success"' b.json > /dev/null || { echo "::error::NewsData body not success"; exit 1; }
+
+  worldnews:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.WORLDNEWS_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://api.worldnewsapi.com/search-news?text=test&api-key=$K" || true)
+          echo "WorldNews: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::WorldNews HTTP $c"; exit 1; }
+
+  currents:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.CURRENTS_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://api.currentsapi.services/v1/latest-news?apiKey=$K" || true)
+          echo "Currents: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::Currents HTTP $c"; exit 1; }
+
+  thenewsapi:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.THENEWSAPI_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://api.thenewsapi.com/v1/news/top?api_token=$K&language=en&limit=1" || true)
+          echo "TheNewsAPI: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::TheNewsAPI HTTP $c"; exit 1; }
+
+  gnews:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.GNEWS_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://gnews.io/api/v4/top-headlines?category=general&lang=en&max=1&apikey=$K" || true)
+          echo "GNews: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::GNews HTTP $c"; exit 1; }
+
+  newsapi:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.NEWSAPI_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://newsapi.org/v2/top-headlines?country=us&pageSize=1&apiKey=$K" || true)
+          echo "NewsAPI: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::NewsAPI HTTP $c"; exit 1; }
+
+  mediastack:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.MEDIASTACK_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://api.mediastack.com/v1/news?access_key=$K&languages=en&limit=1" || true)
+          echo "Mediastack: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::Mediastack HTTP $c"; exit 1; }
+
+  marketaux:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.MARKETAUX_API_KEY }}
+        run: |
+          c=$(curl -s --max-time 30 -o b.json -w "%{http_code}" "https://api.marketaux.com/v1/news/all?api_token=$K&limit=1" || true)
+          echo "Marketaux: HTTP $c :: $(head -c 200 b.json)"
+          [ "$c" = "200" ] || { echo "::error::Marketaux HTTP $c"; exit 1; }
