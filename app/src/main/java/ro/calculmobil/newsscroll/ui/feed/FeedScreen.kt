@@ -15,7 +15,11 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +32,7 @@ import ro.calculmobil.newsscroll.data.FakeNewsRepository
 import ro.calculmobil.newsscroll.data.FeedOrdering
 import ro.calculmobil.newsscroll.data.NewestFirst
 import ro.calculmobil.newsscroll.data.NewsRepository
+import ro.calculmobil.newsscroll.ui.preview.ArticlePreviewSheet
 import ro.calculmobil.newsscroll.ui.theme.NewsScrollTheme
 import java.time.Instant
 import java.time.ZoneId
@@ -40,12 +45,16 @@ private val dateFormatter = DateTimeFormatter
 
 @Composable
 fun FeedScreen(
-    onArticleClick: (String) -> Unit,
+    onReadFullArticle: (String) -> Unit,
     modifier: Modifier = Modifier,
     repository: NewsRepository = FakeNewsRepository,
     ordering: FeedOrdering = NewestFirst
 ) {
     val articles = remember(repository, ordering) { ordering.order(repository.getArticles()) }
+
+    // Stirea apasata, afisata in preview peste lista (#14). null = niciun preview deschis.
+    var previewArticleId by rememberSaveable { mutableStateOf<String?>(null) }
+    val previewArticle = articles.firstOrNull { it.id == previewArticleId }
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -53,8 +62,19 @@ fun FeedScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(articles, key = { it.id }) { article ->
-            ArticleCard(article = article, onClick = { onArticleClick(article.id) })
+            ArticleCard(article = article, onClick = { previewArticleId = article.id })
         }
+    }
+
+    if (previewArticle != null) {
+        ArticlePreviewSheet(
+            article = previewArticle,
+            onReadFull = {
+                previewArticleId = null
+                onReadFullArticle(previewArticle.id)
+            },
+            onDismiss = { previewArticleId = null }
+        )
     }
 }
 
@@ -107,6 +127,6 @@ private fun ArticleCard(
 @Composable
 fun FeedScreenPreview() {
     NewsScrollTheme {
-        FeedScreen(onArticleClick = {})
+        FeedScreen(onReadFullArticle = {})
     }
 }
